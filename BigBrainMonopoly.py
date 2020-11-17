@@ -233,7 +233,7 @@ def game(num_players, bankruptcy, board):
         
     for i in range(1, num_players+1):
         name = input(f"Enter Player {i}'s name: ")
-        players.append(name, player())
+        players.append(player(name))
     
     #Initialising variables
     #-------------------------------------------------------------------------#
@@ -256,7 +256,7 @@ def game(num_players, bankruptcy, board):
     counter = 0
     #Run the game rounds repeatedly until someone wins, if the player is bankrupt, skip the player
     while bankruptcy<num_players-1:
-         if players[counter][1].get_status() == "normal":
+         if players[counter].get_status() == "normal":
             board = gameround(counter, board)
         
         
