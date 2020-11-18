@@ -90,6 +90,9 @@ class player():
     def get_sanity(self):
         return self.sanity
     
+    def get_id(self):
+        return self.id
+    
     def update_sanity(self,sanity):
         self.sanity += sanity
     
@@ -143,21 +146,42 @@ class tile():
     
     id_no = 0
     
+    tileTemplate = {"go":[]}
+    
     def __init__(self, tile_type, building):
         self.id = self.id_no
         self.id_no += 1
-        
+        self.tileSet = []
+        self.playersHere = ["", "", "", "", ""]
         self.tile_type = tile_type
         
         if self.tile_type == "building":
             print("ok")
             self.building = building
+        elif self.tile_type == "go":
+            print("go!")
+            self.tileSet = tileTemplate["go"]
     
     def get_type(self):
         return self.tile_type
     
     def get_building(self):
         return self.building
+    
+    def check_players(self, allPlayers):
+        #finds the players from the list on the tile to adjust
+        counter = 0
+        for i in range(len(allPlayers)):
+            isHere = (allPlayers[i].get_position == self.id)
+            if(isHere):
+                self.playersHere[counter] = str(allPlayers[i].get_id())
+            else:
+                self.playersHere[counter] = ""
+            counter += 1
+        
+    def getTileSet(self):
+        return self.tileSet
+    
     
 #game functions
 #-------------------------------------------------------------------------#
@@ -171,6 +195,10 @@ def roll(strength):
     dice2 = random.randint(1, 6)
     
     return dice1, dice2
+
+def set_board(board):
+    for
+
 
 def update_board(board):
     
